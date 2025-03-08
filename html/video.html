@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial HTML y CSS - YouTube</title>
+    <link rel="stylesheet" href="../sass/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header__left">
+            <button class="header__menu-btn">
+                <span class="material-symbols-outlined">
+                    menu
+                    </span>            </button>
+            <a href="./index.html" class="header__logo">
+                <p>YouTube</p>
+            </a>
+        </div>
+        <div class="header__center">
+            <form class="header__search-form">
+                <div class="header__search-container">
+                    <input type="text" placeholder="Buscar" class="header__search-input">
+                    <button class="header__search-btn">
+                        <span class="material-symbols-outlined">
+                            search
+                            </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="header__right">
+            <button class="header__profile-btn">
+                <span class="material-symbols-outlined">
+                    person
+                    </span>
+            </button>
+        </div>
+    </header>
+
+    <div class="video-container">
+        <div class="video-player-section">
+            <div class="video-player">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/3nYLTiY5skU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="video-info">
+                <h1 class="video-info__title">Tutorial completo de HTML y CSS desde cero - Aprende a crear y diseñar tu primera página web</h1>
+                
+                <div class="video-info__stats">
+                    <div class="video-info__views">
+                        1.245.678 visualizaciones • 15 jun 2023
+                    </div>
+                    
+                    <div class="video-info__actions">
+                        <button class="video-info__action-btn">
+                            <span class="material-symbols-outlined">
+                                thumb_up
+                                </span>
+                            <span>24K</span>
+                        </button>
+                        <button class="video-info__action-btn">
+                            <span class="material-symbols-outlined">
+                                thumb_down
+                                </span>
+                            <span></span>
+                        </button>
+                        <button class="video-info__action-btn">
+                            <span class="material-symbols-outlined">
+                                share
+                                </span>                            
+                            <span>Compartir</span>
+                        </button>
+                        <button class="video-info__action-btn">
+                            <span class="material-symbols-outlined">
+                                favorite
+                                </span>
+                            <span>Guardar</span >
+                        </button>
+                        <button class="video-info__action-btn">
+                            <span class="material-symbols-outlined">
+                                more_vert
+                                </span>
+                            </button>
+                    </div>
+                </div>
+                
+                <div class="channel-info">
+                    <div class="channel-info__left">
+                        <span class="material-symbols-outlined">
+                            person
+                            </span>
+                        <div class="channel-info__details">
+                            <h3 class="channel-info__name">Tutoriales HTML</h3>
+                            <p class="channel-info__subs">500K suscriptores</p>
+                        </div>
+                    </div>
+                    <button class="channel-info__subscribe-btn">Suscribirse</button>
+                </div>
+                
+                <div class="video-description">
+                    <p>En este tutorial aprenderás los fundamentos de HTML y CSS para crear tu primera página web desde cero. Veremos elementos básicos, estructura, estilos y mucho más.</p>
+                    <button class="video-description__more-btn">Mostrar más</button>
+                </div>
+            </div>
+            
+            <div class="comments-section">
+                <div class="comments-section__header">
+                    <h3>1.245 comentarios</h3>
+                </div>
+                
+                <div class="comments-section__add">
+                    <span class="material-symbols-outlined">
+                        person
+                        </span>
+                    <input type="text" placeholder="Añade un comentario..." class="comments-section__input">
+                </div>
+                
+                <div class="comments-section__list" id="comments-container">
+                    <!-- Comments will be generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="suggested-videos">
+            <div class="suggested-videos__list" id="suggested-videos-container">
+                <!-- Suggested videos will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
+
