@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('videos-container');
-  if (container) {
+  const videosContainer = document.getElementById('videos-container');
+  if (videosContainer) {
+      // Primero los videos normales
       for (let i = 0; i < 12; i++) {
           const videoCard = document.createElement('article');
           videoCard.className = 'video-card';
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
               </div>
           `;
-          container.appendChild(videoCard);
+          videosContainer.appendChild(videoCard);
 
           // Añadir event listener para el clic
           videoCard.addEventListener('click', function() {
@@ -30,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
       }
   }
-
 
   const searchResultsContainer = document.getElementById("search-results-container")
   if (searchResultsContainer) {
@@ -69,17 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="comment__time">2 days ago</span>
                     </div>
                     <p class="comment__content-text">This is a great tutorial! Thanks for sharing.</p>
-                    <div class="comment__content-actions">
-                        <button class="comment__action-btn">
-                            <img src="assets/icons/like.svg" alt="Like">
-                            <span>42</span>
-                        </button>
-                        <button class="comment__action-btn">
-                            <img src="assets/icons/dislike.svg" alt="Dislike">
-                        </button>
-                        <button class="comment__action-btn">
-                            <span>Reply</span>
-                        </button>
+                    <div class="comment__content-actions"> 
                     </div>
                 </div>
             `

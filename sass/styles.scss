@@ -1,17 +1,42 @@
-// Variables
-$color-background: #0f0f0f;
-$color-text-primary: #fff;
-$color-text-secondary: #aaa;
-$color-border: #303030;
-$color-hover: #272727;
-$color-active: #383838;
+// Temas
+$themes: (
+  light: (
+    background: #ffffff,
+    text-primary: #0f0f0f,
+    text-secondary: #606060,
+    border: #e5e5e5,
+    hover: #f2f2f2,
+    active: #e5e5e5
+  ),
+  dark: (
+    background: #0f0f0f,
+    text-primary: #ffffff,
+    text-secondary: #aaaaaa,
+    border: #303030,
+    hover: #272727,
+    active: #383838
+  )
+);
+
+// Función para obtener valores del tema
+@function theme-value($key) {
+  @return map-get(map-get($themes, dark), $key);
+}
+
+// Variables principales
+$color-background: theme-value(background);
+$color-text-primary: theme-value(text-primary);
+$color-text-secondary: theme-value(text-secondary);
+$color-border: theme-value(border);
+$color-hover: theme-value(hover);
+$color-active: theme-value(active);
 $color-red: #ff0000;
 $color-blue: #3ea6ff;
 
 $font-primary: Roboto, Arial, sans-serif;
 
 $header-height: 56px;
-$sidebar-width: 240px;
+$sidebar-width: var(--sidebar-width, 240px);
 $sidebar-collapsed-width: 72px;
 
 // Breakpoints
@@ -58,55 +83,80 @@ img {
     height: auto;
 }
 
+// Ejemplo de uso de mixins para flexbox
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 // Header
 .header {
+    @include flex-between;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: $header-height;
     background-color: $color-background;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 0 16px;
     border-bottom: 1px solid $color-border;
     z-index: 100;
 
     &__left {
+        @include flex-center;
+    }
+
+    &__menu-btn {
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
-        
-        .header__menu-btn {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 16px;
-            border-radius: 50%;
-            
-            &:hover {
-                background-color: $color-hover;
-            }
-            
-            img {
-                width: 24px;
-                height: 24px;
-            }
+        justify-content: center;
+        margin-right: 16px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: transparent;
+
+        &:hover {
+            background-color: $color-hover;
         }
-        
-        .header__logo {
-            display: flex;
-            align-items: center;
-            
-            img {
-                height: 20px;
-            }
+
+        &.active {
+            background-color: $color-active;
+        }
+
+        .material-symbols-outlined {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        &.active .material-symbols-outlined {
+            transform: rotate(90deg);
         }
     }
 
+    &__logo {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
     &__center {
+        @include flex-center;
         flex: 1;
         max-width: 640px;
         margin: 0 40px;
@@ -176,41 +226,7 @@ img {
     }
 
     &__right {
-        display: flex;
-        align-items: center;
-        
-        .header__icon-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 8px;
-            
-            &:hover {
-                background-color: $color-hover;
-            }
-            
-            img {
-                width: 24px;
-                height: 24px;
-            }
-        }
-        
-        .header__profile-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-left: 8px;
-            
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
+        @include flex-center;
     }
 }
 
@@ -225,6 +241,16 @@ img {
     overflow-y: auto;
     z-index: 90;
     padding: 12px 0;
+    transition: all 0.3s ease;
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+
+    &.hidden {
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+    }
 
     &::-webkit-scrollbar {
         width: 8px;
@@ -248,6 +274,13 @@ img {
         }
     }
 
+    &__section-title {
+        padding: 8px 24px;
+        font-size: 16px;
+        font-weight: 500;
+        color: $color-text-secondary;
+    }
+
     &__item {
         display: flex;
         align-items: center;
@@ -266,6 +299,10 @@ img {
             }
         }
         
+        &--more {
+            color: $color-text-secondary;
+        }
+        
         img {
             width: 24px;
             height: 24px;
@@ -279,18 +316,54 @@ img {
             text-overflow: ellipsis;
         }
     }
+
+    &__footer {
+        padding: 16px 24px;
+        border-top: 1px solid $color-border;
+        margin-top: 16px;
+
+        &-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+
+            a {
+                font-size: 13px;
+                color: $color-text-secondary;
+                text-decoration: none;
+
+                &:hover {
+                    color: $color-text-primary;
+                }
+            }
+        }
+
+        &-copyright {
+            font-size: 12px;
+            color: $color-text-secondary;
+        }
+    }
 }
 
 // Main content
 .container {
     display: flex;
     margin-top: $header-height;
+    transition: all 0.3s ease;
 }
 
 .main {
     flex: 1;
     margin-left: $sidebar-width;
     padding: 24px 24px 0;
+    transition: all 0.3s ease;
+    width: calc(100% - #{$sidebar-width});
+
+    &.sidebar-hidden {
+        margin-left: 0;
+        width: 100%;
+    }
 
     // Categories
     .categories {
@@ -325,15 +398,34 @@ img {
     // Videos Grid
     .videos-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 16px;
-        margin-bottom: 40px;
+        
+        @media (min-width: 576px) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        @media (min-width: 992px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
 }
 
 // Video card
 .video-card {
     cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.02);
+    }
 
     &__thumbnail {
         position: relative;
@@ -357,21 +449,18 @@ img {
             padding: 3px 4px;
             border-radius: 4px;
             font-size: 12px;
-            font-weight: 500;
         }
     }
 
     &__info {
-        display: flex;
-        
+        @include flex-between;
+        gap: 12px;
+
         &-channel {
-            margin-right: 12px;
-            
             img {
                 width: 36px;
                 height: 36px;
                 border-radius: 50%;
-                object-fit: cover;
             }
         }
         
@@ -388,13 +477,7 @@ img {
                 overflow: hidden;
             }
             
-            &-channel {
-                font-size: 14px;
-                color: $color-text-secondary;
-                margin-bottom: 4px;
-            }
-            
-            &-stats {
+            &-channel, &-stats {
                 font-size: 14px;
                 color: $color-text-secondary;
             }
