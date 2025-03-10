@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Añadir event listener para el clic
           videoCard.addEventListener('click', function() {
               const videoId = this.getAttribute('data-video-id');
-              window.location.href = `video.html?id=${videoId}`;
+              window.location.href = `html/video.html?id=${videoId}`;
           });
       }
   }
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
           
           if (searchTerm) {
               // Redirige a search.html con el término de búsqueda como parámetro de consulta
-              window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+              window.location.href = `html/search.html?q=${encodeURIComponent(searchTerm)}`;
           }
       });
   }
